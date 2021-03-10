@@ -1,0 +1,49 @@
+<div class="container">
+    <h1>Forms and validations</h1>
+    <h2>ngModelGroup Demo (No validation done)</h2>
+
+    <form #f="ngForm" class="row">
+        <div class="col-md-4" ngModelGroup="passwords">
+            <input type="password" class="form-control" placeholder="Enter Password" ngModel name="password">
+            <br>
+            <input type="password" class="form-control" placeholder="Confirm Password" ngModel name="confirmPassword">
+        </div>
+    </form>
+
+    <pre>
+        {{ f.value | json }}
+    </pre>
+    <pre>
+        Password Entered: {{ f.value?.passwords?.password }}
+        Confirm password entered: {{ f.value?.passwords?.confirmPassword }}
+    </pre>
+
+    <hr>
+
+    <h2>Reactive form with custom validator demo</h2>
+    <h4>Register using FormBuilder approach</h4>
+    <p>Why this? Creating form control instances manually can become repetitive when dealing 
+        with multiple forms. The FormBuilder service </p>
+    <div class="row">
+        <form class="col-md-6" [formGroup]="signupForm" (ngSubmit)="signupHandler()">
+            <input type="text" placeholder="Enter Name" class="form-control" formControlName="name"> <br>
+            <input type="email" placeholder="Enter Email" class="form-control" formControlName="email"> <br>
+
+            <input type="password" placeholder="Enter Password" class="form-control" formControlName="password"> <br>
+            <input type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassword"> <br>
+            <div *ngIf="signupForm.get('confirmPassword').errors?.mustMatch" class="alert alert-danger">
+                Password is not matching.
+            </div>
+
+            <input type="checkbox" formControlName="agreeTerms"> Agree to Terms & Conditions <br>
+            <button type="submit" class="btn btn-primary">Register</button> <!-- [disabled]='signupForm.invalid' -->
+
+        </form>
+
+    </div>
+
+
+    <h2>Template driven form with custom validator demo</h2>
+    <!-- 4 steps (can find them in the slides) -->
+
+</div>

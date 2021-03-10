@@ -1,0 +1,95 @@
+<div class="container-fluid">
+
+    <h2 class="mt-5">{{ pageName }}</h2> <!-- string interpolation -->
+    <p [title]="subText">Mouseover to see</p> <!-- property binding -->
+    <input type="text" [value]="subText"> <!-- property binding -->
+
+    <br><br>
+    <p>{{ subText }}</p>
+    <input type="text" [(ngModel)]="subText"> <!-- 2 way binding -->
+    <br><br>
+
+    <div class="col">
+        <div class="row">
+
+            <!-- *ngFor Demo -->
+            <div class="col-12 col-md-6 col-lg-3" *ngFor="let product of productList">
+                
+                <!-- {{ product | json }} -->
+                <div class="card">
+                    <img class="card-img-top" src="https://dummyimage.com/300x200/55595c/fff" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a routerLink="/products/1" title="ViewProduct">{{ product.name }}</a></h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the</p>
+                        <div class="row">
+                            <div class="col">
+                                <p class="btn btn-danger btn-block">{{ product.price }}</p>
+
+                            </div>
+                            <div class="col">
+                                <!-- event binding -->
+                                <a class="btn btn-success btn-block" (click)="addToCartHandler($event, product)">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <br><br><br>
+    <h3>*ngIf Demo</h3>
+
+
+    <div class="alert alert-success" *ngIf="isLoggedIn; else NotAuthContainer">
+        Thank you for logged in... You can access premium features.
+    </div>
+    <ng-template #NotAuthContainer>
+        <div class="alert alert-danger">
+            Please login to access premium features.
+        </div>
+    </ng-template>
+    
+    <!-- TODO: Try ngSwitch (used for if, else if, else if, etc) -->
+
+    <div>
+        <h3>Custom Directive - Demo</h3>
+
+        <div appColorizer>
+            <p>My Directive</p>
+            <p>Testing</p>
+        </div>
+    </div>
+
+    <div>
+        <h3>Pipes - Demo</h3>
+
+        <p>{{ today }}</p>
+        <p>{{ today | date }}</p>
+
+        <!-- Parameterized pipe -->
+        <p>{{ today | date: 'MM/dd/yyyy hh:mm:ss a' }}</p>
+        <p>{{ today | date: 'MMMM-dd-yyyy hh:mm a' }}</p>
+        <p>{{ today | date: 'shortDate' }}</p>
+
+        <p>{{ subText }}</p>
+        <p>{{ subText | uppercase }}</p>
+
+        <!-- Chaining pipes -->
+        <p>{{ today | date: 'MMMM dd, yyyy hh:mm a' | uppercase }}</p>
+
+        <p>Custom Pipes</p>
+
+        <p>{{randomText}}</p>
+
+        <p>{{randomText | ellipsis}}</p>
+        <!-- Parameter in Custom Pipe -->
+        <p>{{randomText | ellipsis: '50'}}</p>
+        <p>{{randomText | ellipsis: '10'}}</p>
+
+    </div>
+
+</div>
